@@ -26,6 +26,7 @@ public class HomeController {
 	@Autowired
 	private UserRepository userRepository;
 
+	//Handler For Home Page
 	@GetMapping("/")
 	public String home(Model model) {
 		
@@ -35,6 +36,7 @@ public class HomeController {
 		
 	}
 	
+	//Handler For About Page
 	@GetMapping("/about")
 	public String about(Model model) {
 		
@@ -44,6 +46,7 @@ public class HomeController {
 		
 	}
 	
+	//Handler For Signup Page
 	@GetMapping("/signup")
 	public String signup(Model model) {
 		
@@ -55,6 +58,7 @@ public class HomeController {
 		
 	}
 	
+	//Handler For Signin Page
 	@GetMapping("/signin")
 	public String signin(Model model) {
 		
