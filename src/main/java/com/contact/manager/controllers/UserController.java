@@ -74,6 +74,7 @@ public class UserController {
 		
 	}
 	
+	//Handler For Opening Add Contact Form
 	@GetMapping("/add-contact")
 	public String addContactForm(Model model) {
 		
@@ -94,6 +95,8 @@ public class UserController {
 	 * @param session
 	 * @return
 	 */
+	
+	//Handler For Processing Add Contact
 	@PostMapping("/process-contact")
 	public String processAddContact(
 			@Valid 
