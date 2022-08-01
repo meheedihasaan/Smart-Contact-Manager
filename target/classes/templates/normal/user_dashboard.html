@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" th:replace="normal/base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>User Dashboard</title>
+</head>
+<body>
+	<section>
+		<div class="container">
+			<div class="card pt-4 pb-5 px-5">
+				<div class="card-body text-center ">
+				
+					<!-- ALERT MESSAGE -->
+				    <div th:if="${session.message}" th:classappend="${session.message.type}" class="alert alert-primary mb-4" role="alert">
+				    	<p class="text-center pb-0 mb-0" th:text="${session.message.content}"></p>
+				    	<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+				    </div>
+				    <!-- END OF ALERT MESSAGE -->
+				    
+					<img class="rounded-circle" src="" th:src="@{/img/phone.png}" alt="Phone" />
+					<h2 class="text-secondary font-italic font-weight-light mt-4">Start Adding Your Contacts...</h2>
+					<a href="#" th:href="@{/user/add-contact}" class="btn btn-primary mt-5 btn-block">Add New Contact</a>
+				</div>
+			</div>
+		</div>
+		
+		<script>
+			$(document).ready(()=>{
+				$(".item").removeClass("active");
+				$("#dashboard-link").addClass("active");
+			});
+		</script>
+		
+	</section>
+</body>
+</html>

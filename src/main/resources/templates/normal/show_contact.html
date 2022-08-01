@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" th:replace="normal/base::layout(~{::section})">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	
+	<section>
+		<div class="container">
+			<div class="card px-5 px-2">
+				<div class="card-body">
+					<!-- ALERT MESSAGE -->
+				    <div th:if="${session.message}" th:classappend="${session.message.type}" class="alert alert-primary" role="alert">
+				    	<p class="text-center pb-0 mb-0" th:text="${session.message.content}"></p>
+				    	<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+				    </div>
+				    <!-- END ALERT MESSAGE -->
+				    
+					<h1 class="text-center mb-4">All Contacts</h1>			
+					
+				    <!-- START SEARCH SECTION -->
+				    <div class="search-section mb-3">
+				    	<input onkeyup="search()" id="searchBox" type="text" class="form-control" placeholder="Search" />
+				    	<div class="search-result">
+				    		<!-- Search result is here -->
+				    		<h2>Your search result..</h2>
+				    	</div>
+				    </div>
+				    <!-- END SEARCH SECTION -->
+				    
+					<table class="table">
+					  <thead>
+					    <tr>
+					      <th scope="col">#Id</th>
+					      <th scope="col">Name</th>
+					      <th scope="col">Phone</th>
+					      <th scope="col">Email</th>
+					      <th scope="col">Action</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					    <tr th:each="c : ${contacts}">
+					      <th th:text="${'SCMUSER'+c.cid}" scope="row"></th>
+					      <td>
+					      	<img th:src="@{'/static/img/'+${c.imageUrl}}" alt="" />
+					      	
+					      	<span th:text="${c.name}"></span>
+					      </td>
+					      <td th:text="${c.phone}"></td>
+					      <td th:text=${c.email}></td>
+					      <td>
+					      	<a th:href="@{'/user/'+${c.cid}+'/contact'}" class="btn btn-success btn-sm text-white"><i class="fa fa-eye"></i></a>
+                            <a th:href="@{'/user/update-contact/'+${c.cid}}" class="btn btn-primary btn-sm text-white"><i class="fa fa-pencil"></i></a>
+					      	<a th:onclick="|deleteContact(${c.cid})|" class="btn btn-danger btn-sm text-white"><i class="fa fa-trash"></i></a>
+					      </td>
+					    </tr>
+					  </tbody>
+					</table>
+					<nav aria-label="Page navigation example">
+					  <ul class="pagination">
+					    <li th:if="${currentPage != 0}" class="page-item"><a th:href="@{'/user/show-contact/' + ${currentPage-1}}" class="page-link" href="#">Previous</a></li>
+					    
+					    <li th:classappend="${currentPage == e-1 ? 'active' : ''}" th:each="e : ${#numbers.sequence(1, totalPages)}" class="page-item"><a th:href="@{'/user/show-contact/' + ${e-1}}" class="page-link" href="#"><span th:text="${e}"></span></a></li>
+					    
+					    <li th:if="${currentPage+1 != totalPages}" class="page-item"><a th:href="@{'/user/show-contact/' + ${currentPage+1}}" class="page-link" href="#">Next</a></li>
+					  </ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+</body>
+</html>
